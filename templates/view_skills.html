@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Skilled Users</h2>
+
+<form method="post">
+  <input type="text" name="search" placeholder="Search skills..." value="{{ request.form.get('search', '') }}">
+  <input type="submit" value="Search">
+</form>
+
+<ul>
+  {% for skill in skills %}
+    <li style="margin-bottom:20px;">
+      <strong>{{ skill.skill }}</strong><br>
+      {{ skill.description }}<br>
+      <img src="{{ url_for('static', filename='uploads/' + skill.certificate) }}" width="200"><br>
+      {% if user_id == skill.user_id %}
+        <form action="{{ url_for('delete_skill', id=skill.id) }}" method="post">
+          <input type="submit" value="Delete" style="background-color: red;">
+        </form>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

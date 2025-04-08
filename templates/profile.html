@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>My Profile</h2>
+<div style="text-align:center;">
+  <img src="{{ url_for('static', filename='uploads/' + user.profile_photo) }}" alt="Profile Photo" class="profile-pic" style="width:100px; height:100px;">
+</div>
+<ul>
+  <li><strong>Name:</strong> {{ user.name }}</li>
+  <li><strong>Email:</strong> {{ user.email }}</li>
+  <li><strong>Phone:</strong> {{ user.phone }}</li>
+  <li><strong>House No.:</strong> {{ user.house_number }}</li>
+</ul>
+{% endblock %}

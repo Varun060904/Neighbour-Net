@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Listed Tools</h2>
+
+<form method="post">
+  <input type="text" name="search" placeholder="Search tools..." value="{{ request.form.get('search', '') }}">
+  <input type="submit" value="Search">
+</form>
+
+<ul>
+  {% for tool in tools %}
+    <li style="margin-bottom:20px;">
+      <strong>{{ tool.name }}</strong><br>
+      {{ tool.description }}<br>
+      <img src="{{ url_for('static', filename='uploads/' + tool.image) }}" width="200"><br>
+      {% if user_id == tool.user_id %}
+        <form action="{{ url_for('delete_tool', id=tool.id) }}" method="post">
+          <input type="submit" value="Delete" style="background-color: red;">
+        </form>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Add Tool for Sharing</h2>
+<form method="post" enctype="multipart/form-data">
+  <input type="text" name="name" placeholder="Tool Name" required>
+  <textarea name="description" placeholder="Tool Description" required></textarea>
+  <label>Upload Tool Image:</label>
+  <input type="file" name="image" accept="image/*" required>
+  <input type="submit" value="Add Tool">
+</form>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Add Skilled User</h2>
+<form method="post" enctype="multipart/form-data">
+  <input type="text" name="skill" placeholder="Skill (e.g. Plumber)" required>
+  <textarea name="description" placeholder="Skill Description" required></textarea>
+  <label>Upload Certificate:</label>
+  <input type="file" name="certificate" accept="image/*" required>
+  <input type="submit" value="Add Skill">
+</form>
+{% endblock %}

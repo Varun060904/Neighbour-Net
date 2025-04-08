@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NeighborNet</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  {% if user %}
+  <div class="sidebar" id="sidebar">
+    <ul>
+      <li><a href="{{ url_for('profile') }}">Profile</a></li>
+      <li><a href="{{ url_for('add_skill') }}">Add Skilled User</a></li>
+      <li><a href="{{ url_for('view_skills') }}">View Skilled Users</a></li>
+      <li><a href="{{ url_for('add_tool') }}">Add Tool</a></li>
+      <li><a href="{{ url_for('view_tools') }}">Listed Tools</a></li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+  </div>
+  {% endif %}
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="top-left">
+      {% if user %}
+        <span class="menu-toggle" onclick="toggleSidebar()">&#9776;</span>
+      {% endif %}
+    </div>
+    <div class="top-right">
+      {% if user %}
+        <img src="{{ url_for('static', filename='uploads/' + user.profile_photo) }}" alt="Profile" class="profile-pic" />
+      {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="flash">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Sidebar Toggle Script -->
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("sidebar-hidden");
+    }
+  </script>
+</body>
+</html>
